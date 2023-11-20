@@ -11,6 +11,7 @@ namespace MainMenu
         List<string>? _menu_elements = new List<string>()
             { "HomeWork 16 : [{CopperFactory}]",
               "Task_1: CopperFactory demo",
+              //"Task_2: HR system demo",
             };
 
         public void AddElement(string menu_element) { _menu_elements.Add(menu_element); }
@@ -38,6 +39,7 @@ namespace MainMenu
             }
 
             else if (choice == 1) IDA_C_sh_HomeWork.Program.Task_1(_menu_elements[1]);
+            //else if (choice == 2) IDA_C_sh_HomeWork.Program.Task_1(_menu_elements[2]);
 
 
             else { Console.Write("\nSuch choice does not exist yet\n"); Thread.Sleep(1000); }
