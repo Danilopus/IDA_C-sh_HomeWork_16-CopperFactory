@@ -89,5 +89,22 @@ namespace IDA_C_sh_HomeWork16_HR_System
         {
             return FirstName + " " + LastName + " ID_" + EmployeeID;
         }
+        public void YouAreHired() 
+        {
+           // Console.WriteLine($"Hired_event invoke ({this})");
+           // Hired_event(this);
+            Console.WriteLine($"Hired_event_static invoke ({this})");
+            Hired_event_static(this); }
+
+        ///// DELEGATES /////
+
+        public delegate void Hired(Employee employee);
+        public event Hired Hired_event = delegate { };
+        static public event Hired Hired_event_static = delegate { };
+        public void Hired_invoke()
+        {
+            Console.WriteLine($"Hired_event invoke ({this})");
+            Hired_event(this); }
+
     }
 }

@@ -15,7 +15,6 @@ namespace IDA_C_sh_HomeWork
     {
         static void Main(string[] args)
         {
-
             MainMenu.MainMenu mainMenu = new MainMenu.MainMenu();
 
             do
@@ -57,9 +56,28 @@ namespace IDA_C_sh_HomeWork
         foreach (Employee employee in Employee.GetEmployeeTeam(20))
                 manageSystem.AddEmployee(employee);
 
+            // Использование делегатов:
+
+            // Схема 1 : Управляемый извнекласса список выполняемых классом методов
+            // Теперь при вызове EmployeeManageSystem.DismissalEmployee будет выполняется
+            // заданный нами код
+            Employee.Hired_event_static += manageSystem.DismissalEmployee_standart; // статическое событие - удобно назначать
+
+            // Схема 2 : Паттерн Издатель-Подписчик
+            // Заинтересованный класс может подписаться на событие увольнения сотрудника
+            // и при наступления события (в предположении что оно может быть вызвано другими
+            // частями кода) провести некоторые свои дейсвтия
+            foreach (Employee employee in manageSystem.JUSTFORTESTINGACCESS_employees_list())
+                employee.Hired_event += manageSystem.EmployeeHiredSubscibe; // обычное событие - нужно назначать каждому экземпляру
+
+            // Имитируем внешний вызов события Hired_event через тестовую функцию, предоставляющей доступ к списку сотрудников
+            int random_employee_index = (int)ServiceFunction.Get_Random(manageSystem.JUSTFORTESTINGACCESS_employees_list().Count);
+            manageSystem.JUSTFORTESTINGACCESS_employees_list()[random_employee_index].Hired_invoke();
+
+            Console.ReadKey();
+
+
             manageSystem.Menu();
-
-
         }
 
 
